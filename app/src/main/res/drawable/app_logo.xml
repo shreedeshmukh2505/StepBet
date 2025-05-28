@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Background Circle -->
+    <path
+        android:fillColor="#6200EE"
+        android:pathData="M54,54m-48,0a48,48 0,1 1,96 0a48,48 0,1 1,-96 0" />
+
+    <!-- Inner Circle - Lighter Purple -->
+    <path
+        android:fillColor="#7E3FF2"
+        android:pathData="M54,54m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0" />
+
+    <!-- Shoe Footprint Left -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,36c-4,0 -7.5,2 -9,5c-1.5,3 -1,6.5 1,9c2,2.5 5,4 8,4c1.5,0 3,-0.5 4.5,-1.5c1.5,-1 2.5,-2.5 3,-4c0.5,-1.5 0.5,-3 0,-4.5c-0.5,-1.5 -1.5,-2.5 -2.5,-3.5c-1,-1 -2.5,-1.5 -3.5,-2c-0.5,-0.5 -1,-0.5 -1.5,-0.5z" />
+
+    <!-- Shoe Footprint Right -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M68,54c-4,0 -7.5,2 -9,5c-1.5,3 -1,6.5 1,9c2,2.5 5,4 8,4c1.5,0 3,-0.5 4.5,-1.5c1.5,-1 2.5,-2.5 3,-4c0.5,-1.5 0.5,-3 0,-4.5c-0.5,-1.5 -1.5,-2.5 -2.5,-3.5c-1,-1 -2.5,-1.5 -3.5,-2c-0.5,-0.5 -1,-0.5 -1.5,-0.5z" />
+
+    <!-- Coin Icon - Represents Betting -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M54,70m-12,0a12,12 0,1 1,24 0a12,12 0,1 1,-24 0" />
+
+    <!-- Rupee Symbol -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,64v12M51,66h6M51,70h6M51,76h6M57,66l-6,10"
+        android:strokeWidth="2"
+        android:strokeColor="#6200EE"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- Step Counter Slash Marks -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M32,46l3,-6M36,44l3,-6M40,42l3,-6M62,46l3,-6M66,44l3,-6M70,42l3,-6" />
+
+</vector>

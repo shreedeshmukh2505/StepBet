@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "250663294199",
+    "project_id": "stepbet-679c8",
+    "storage_bucket": "stepbet-679c8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250663294199:android:9c9e1918fdce1731236ff2",
+        "android_client_info": {
+          "package_name": "com.example.stepbet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGd_JAyt5k4qsM7ZzJNP5M_N2HmZYvWvg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

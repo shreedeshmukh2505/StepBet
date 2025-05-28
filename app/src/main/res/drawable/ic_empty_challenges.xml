@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120"
+    android:tint="@color/gray_500">
+
+    <!-- Background Circle -->
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M60,60m-50,0a50,50 0,1 1,100 0a50,50 0,1 1,-100 0" />
+
+    <!-- Trophy/Challenge Icon -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M60,25C55,25 51,29 51,34v6c0,3 1.5,5.5 4,7v8c0,2.2 1.8,4 4,4h2c2.2,0 4,-1.8 4,-4v-8c2.5,-1.5 4,-4 4,-7v-6C69,29 65,25 60,25z" />
+
+    <!-- Trophy Base -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M50,65h20c2.2,0 4,1.8 4,4v6c0,2.2 -1.8,4 -4,4H50c-2.2,0 -4,-1.8 -4,-4v-6C46,66.8 47.8,65 50,65z" />
+
+    <!-- Trophy Handles -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M45,35h-8c-2.2,0 -4,1.8 -4,4v8c0,2.2 1.8,4 4,4h8M75,35h8c2.2,0 4,1.8 4,4v8c0,2.2 -1.8,4 -4,4h-8" />
+
+    <!-- Crossed out lines to indicate "no challenges" -->
+    <path
+        android:strokeColor="#F44336"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M35,35L85,85M85,35L35,85" />
+
+    <!-- Small steps around the icon -->
+    <path
+        android:fillColor="#EEEEEE"
+        android:pathData="M25,25c-1,0 -2,0.5 -2.5,1.5c-0.5,1 0,2 0.5,2.5c0.5,0.5 1.5,1 2.5,1c0.5,0 1,-0.2 1.5,-0.5c0.5,-0.3 0.8,-0.8 1,-1.3c0.2,-0.5 0.2,-1 0,-1.5c-0.2,-0.5 -0.5,-0.8 -0.8,-1c-0.3,-0.2 -0.7,-0.4 -1.2,-0.5c-0.3,-0.2 -0.5,-0.2 -1,-0.2z" />
+
+    <path
+        android:fillColor="#EEEEEE"
+        android:pathData="M95,25c-1,0 -2,0.5 -2.5,1.5c-0.5,1 0,2 0.5,2.5c0.5,0.5 1.5,1 2.5,1c0.5,0 1,-0.2 1.5,-0.5c0.5,-0.3 0.8,-0.8 1,-1.3c0.2,-0.5 0.2,-1 0,-1.5c-0.2,-0.5 -0.5,-0.8 -0.8,-1c-0.3,-0.2 -0.7,-0.4 -1.2,-0.5c-0.3,-0.2 -0.5,-0.2 -1,-0.2z" />
+
+    <path
+        android:fillColor="#EEEEEE"
+        android:pathData="M25,95c-1,0 -2,0.5 -2.5,1.5c-0.5,1 0,2 0.5,2.5c0.5,0.5 1.5,1 2.5,1c0.5,0 1,-0.2 1.5,-0.5c0.5,-0.3 0.8,-0.8 1,-1.3c0.2,-0.5 0.2,-1 0,-1.5c-0.2,-0.5 -0.5,-0.8 -0.8,-1c-0.3,-0.2 -0.7,-0.4 -1.2,-0.5c-0.3,-0.2 -0.5,-0.2 -1,-0.2z" />
+
+    <path
+        android:fillColor="#EEEEEE"
+        android:pathData="M95,95c-1,0 -2,0.5 -2.5,1.5c-0.5,1 0,2 0.5,2.5c0.5,0.5 1.5,1 2.5,1c0.5,0 1,-0.2 1.5,-0.5c0.5,-0.3 0.8,-0.8 1,-1.3c0.2,-0.5 0.2,-1 0,-1.5c-0.2,-0.5 -0.5,-0.8 -0.8,-1c-0.3,-0.2 -0.7,-0.4 -1.2,-0.5c-0.3,-0.2 -0.5,-0.2 -1,-0.2z" />
+
+</vector>

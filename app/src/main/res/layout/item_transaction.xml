@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/ivTransactionIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="Transaction icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_deposit" />
+
+        <TextView
+            android:id="@+id/tvTransactionTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvTransactionAmount"
+            app:layout_constraintStart_toEndOf="@+id/ivTransactionIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Added Money" />
+
+        <TextView
+            android:id="@+id/tvTransactionDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/tvTransactionAmount"
+            app:layout_constraintStart_toStartOf="@+id/tvTransactionTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvTransactionTitle"
+            tools:text="12 May 2025, 02:30 PM" />
+
+        <TextView
+            android:id="@+id/tvTransactionStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_status_completed"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@+id/tvTransactionDate"
+            app:layout_constraintTop_toBottomOf="@+id/tvTransactionDate"
+            tools:ignore="SmallSp"
+            tools:text="Completed" />
+
+        <TextView
+            android:id="@+id/tvTransactionAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="+₹100"
+            tools:textColor="@color/green_500" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

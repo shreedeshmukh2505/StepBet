@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_900"
+    tools:context=".home.HomeFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:paddingTop="80dp">
+
+            <!-- Header Section -->
+            <TextView
+                android:id="@+id/tvWelcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Welcome back,"
+                android:textSize="16sp"
+                android:textColor="@color/text_secondary_dark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="User"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary_dark"
+                app:layout_constraintEnd_toStartOf="@+id/tvWalletLabel"
+                app:layout_constraintStart_toEndOf="@+id/tvWelcome"
+                app:layout_constraintTop_toTopOf="@+id/tvWelcome" />
+
+            <TextView
+                android:id="@+id/tvWalletLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wallet:"
+                android:textSize="16sp"
+                android:textColor="@color/text_secondary_dark"
+                app:layout_constraintEnd_toStartOf="@+id/tvWalletBalance"
+                app:layout_constraintTop_toTopOf="@+id/tvWelcome" />
+
+            <TextView
+                android:id="@+id/tvWalletBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="₹0.00"
+                android:textColor="@color/green_400"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvWalletLabel" />
+
+            <!-- Step Counter Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardStepCounter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/gray_800"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvWelcome">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/tvStepLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Steps Today"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary_dark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvStepCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="0"
+                        android:textSize="52sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary_400"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvStepLabel" />
+
+                    <ImageView
+                        android:id="@+id/ivSteps"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:src="@drawable/ic_footsteps"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvStepCount"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tvStepCount"
+                        android:contentDescription="Step Icon"
+                        app:tint="@color/primary_400" />
+
+                    <!-- Progress Section -->
+                    <TextView
+                        android:id="@+id/tvStepProgress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="0 steps today"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_secondary_dark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvStepCount" />
+
+                    <ProgressBar
+                        android:id="@+id/progressSteps"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="12dp"
+                        android:layout_marginTop="8dp"
+                        android:progressTint="@color/green_400"
+                        android:progressBackgroundTint="@color/gray_600"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvStepProgress" />
+
+                    <!-- Progress Status Text -->
+                    <TextView
+                        android:id="@+id/tvProgressStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Start walking to reach your goal!"
+                        android:textSize="14sp"
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:textColor="@color/text_secondary_dark"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/progressSteps" />
+
+                    <!-- Test Step Buttons -->
+                    <LinearLayout
+                        android:id="@+id/layoutTestButtons"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvProgressStatus">
+
+                        <Button
+                            android:id="@+id/btnAdd100Steps"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_weight="1"
+                            android:text="+100"
+                            android:textSize="12sp"
+                            android:textColor="@color/white"
+                            android:backgroundTint="@color/primary_500"
+                            app:cornerRadius="8dp" />
+
+                        <Button
+                            android:id="@+id/btnAdd500Steps"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginHorizontal="3dp"
+                            android:layout_weight="1"
+                            android:text="+500"
+                            android:textSize="12sp"
+                            android:textColor="@color/white"
+                            android:backgroundTint="@color/green_500"
+                            app:cornerRadius="8dp" />
+
+                        <Button
+                            android:id="@+id/btnAdd1000Steps"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_weight="1"
+                            android:text="+1000"
+                            android:textSize="12sp"
+                            android:textColor="@color/white"
+                            android:backgroundTint="@color/amber_500"
+                            app:cornerRadius="8dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvTestNote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Test buttons (remove in production)"
+                        android:textSize="10sp"
+                        android:textStyle="italic"
+                        android:textColor="@color/text_tertiary_dark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/layoutTestButtons" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Active Challenge Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/layoutActiveChallenge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/gray_800"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardStepCounter">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/tvActiveChallengeLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Current Challenge"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary_dark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Challenge Details Row -->
+                    <LinearLayout
+                        android:id="@+id/layoutChallengeDetails"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvActiveChallengeLabel">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Goal"
+                                android:textSize="12sp"
+                                android:textColor="@color/text_secondary_dark" />
+
+                            <TextView
+                                android:id="@+id/tvChallengeGoal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="5000 steps"
+                                android:textStyle="bold"
+                                android:textColor="@color/primary_400"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Stake"
+                                android:textSize="12sp"
+                                android:textColor="@color/text_secondary_dark" />
+
+                            <TextView
+                                android:id="@+id/tvChallengeStake"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="₹50"
+                                android:textStyle="bold"
+                                android:textColor="@color/red_400"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Reward"
+                                android:textSize="12sp"
+                                android:textColor="@color/text_secondary_dark" />
+
+                            <TextView
+                                android:id="@+id/tvPotentialReward"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="₹57.50"
+                                android:textColor="@color/green_400"
+                                android:textStyle="bold"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Progress Section -->
+                    <TextView
+                        android:id="@+id/tvChallengeProgressLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Progress"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary_dark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/layoutChallengeDetails" />
+
+                    <TextView
+                        android:id="@+id/tvChallengeProgress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0/5000 (0%)"
+                        android:textSize="16sp"
+                        android:textColor="@color/primary_400"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tvChallengeProgressLabel" />
+
+                    <ProgressBar
+                        android:id="@+id/progressChallenge"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="12dp"
+                        android:layout_marginTop="8dp"
+                        android:progressTint="@color/primary_400"
+                        android:progressBackgroundTint="@color/gray_600"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvChallengeProgressLabel" />
+
+                    <!-- Challenge Status Message -->
+                    <TextView
+                        android:id="@+id/tvChallengeStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Keep walking to complete your challenge!"
+                        android:textSize="14sp"
+                        android:textStyle="italic"
+                        android:gravity="center"
+                        android:textColor="@color/text_secondary_dark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/progressChallenge" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- No Challenge State -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/layoutNoChallenge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/gray_800"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardStepCounter"
+                tools:visibility="visible">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="32dp">
+
+                    <ImageView
+                        android:id="@+id/ivNoChallenge"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_add_challenge"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="No Challenge Icon"
+                        app:tint="@color/gray_500" />
+
+                    <TextView
+                        android:id="@+id/tvNoChallengeTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="No Active Challenge"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary_dark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ivNoChallenge" />
+
+                    <TextView
+                        android:id="@+id/tvNoChallengeMessage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Create your first challenge to start betting on your fitness goals and earn rewards!"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:textColor="@color/text_secondary_dark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvNoChallengeTitle" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Create Challenge Button -->
+            <Button
+                android:id="@+id/btnCreateChallenge"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="28dp"
+                android:text="Create New Challenge"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/primary_500"
+                app:cornerRadius="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutActiveChallenge" />
+
+            <!-- Debug Section (remove in production) -->
+            <TextView
+                android:id="@+id/tvDebugInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Debug: Check logs for challenge status"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:textColor="@color/text_tertiary_dark"
+                android:gravity="center"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnCreateChallenge" />
+
+            <Button
+                android:id="@+id/btnDebugChallenges"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="12dp"
+                android:text="Debug Challenge Info"
+                android:textSize="12sp"
+                android:backgroundTint="@color/gray_600"
+                android:textColor="@color/white"
+                app:cornerRadius="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDebugInfo" />
+
+            <!-- Hidden elements for compatibility -->
+            <TextView
+                android:id="@+id/tvChallengeGoalLabel"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvChallengeStakeLabel"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvPotentialRewardLabel"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTimeRemaining"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

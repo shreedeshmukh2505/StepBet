@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_900"
+    android:fillViewport="true"
+    tools:context=".challenges.CreateChallengeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:paddingTop="80dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Create New Challenge"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Set your step goal and stake amount for a 24-hour challenge"
+            android:textColor="@color/gray_300"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+        <TextView
+            android:id="@+id/tvStepGoalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Step Goal"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderStepGoal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:valueFrom="5000"
+            android:valueTo="15000"
+            android:stepSize="1000"
+            app:thumbColor="@color/primary_400"
+            app:trackColorActive="@color/primary_400"
+            app:trackColorInactive="@color/gray_600"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvStepGoalLabel" />
+
+        <TextView
+            android:id="@+id/tvSelectedStepGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="8,000 steps"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sliderStepGoal" />
+
+        <TextView
+            android:id="@+id/tvStakeAmountLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Stake Amount"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSelectedStepGoal" />
+
+        <RadioGroup
+            android:id="@+id/rgStakeAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvStakeAmountLabel">
+
+            <RadioButton
+                android:id="@+id/rbStake20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="₹20"
+                android:textColor="@color/white"
+                android:buttonTint="@color/primary_400" />
+
+            <RadioButton
+                android:id="@+id/rbStake50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="₹50"
+                android:textColor="@color/white"
+                android:buttonTint="@color/primary_400" />
+
+            <RadioButton
+                android:id="@+id/rbStake100"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="₹100"
+                android:textColor="@color/white"
+                android:buttonTint="@color/primary_400" />
+
+            <RadioButton
+                android:id="@+id/rbStake200"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="₹200"
+                android:textColor="@color/white"
+                android:buttonTint="@color/primary_400" />
+
+            <RadioButton
+                android:id="@+id/rbCustomStake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Custom Amount"
+                android:textColor="@color/white"
+                android:buttonTint="@color/primary_400" />
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCustomStakeAmount"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Enter Stake Amount"
+            app:boxStrokeColor="@color/primary_400"
+            app:hintTextColor="@color/gray_400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rgStakeAmount"
+            app:prefixText="₹"
+            app:prefixTextColor="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCustomStakeAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:inputType="numberDecimal"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray_400" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvMinStakeNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Minimum stake amount is ₹20"
+            android:textSize="12sp"
+            android:textColor="@color/gray_400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilCustomStakeAmount" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardRewardInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/gray_800"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMinStakeNote">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvRewardInfoTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reward Info"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvRewardPercentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Reward Percentage:"
+                    android:textColor="@color/gray_300"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvRewardInfoTitle" />
+
+                <TextView
+                    android:id="@+id/tvRewardPercentageValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="15%"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_400"
+                    app:layout_constraintStart_toEndOf="@+id/tvRewardPercentage"
+                    app:layout_constraintTop_toTopOf="@+id/tvRewardPercentage" />
+
+                <TextView
+                    android:id="@+id/tvPotentialRewardLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Potential Reward:"
+                    android:textColor="@color/gray_300"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvRewardPercentage" />
+
+                <TextView
+                    android:id="@+id/tvPotentialRewardValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="₹57.50"
+                    android:textColor="@color/green_400"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/tvPotentialRewardLabel"
+                    app:layout_constraintTop_toTopOf="@+id/tvPotentialRewardLabel" />
+
+                <TextView
+                    android:id="@+id/tvChallengeInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Your challenge will start immediately and last for 24 hours. If you meet your step goal, you'll get your stake back plus the reward."
+                    android:textColor="@color/gray_300"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPotentialRewardLabel" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnCreateChallenge"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:text="Start Challenge"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/primary_500"
+            app:cornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardRewardInfo" />
+
+        <TextView
+            android:id="@+id/tvWalletBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="Your wallet balance: ₹0.00"
+            android:textColor="@color/gray_400"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCreateChallenge" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

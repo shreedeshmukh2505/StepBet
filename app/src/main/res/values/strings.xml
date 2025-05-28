@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StepBet</string>
+    <string name="home">Home</string>
+
+    <!-- Firebase Notification Channel -->
+    <string name="default_notification_channel_id">step_bet_fcm_channel</string>
+
+    <!-- Step Counter Notification Channel -->
+    <string name="step_counter_notification_channel_id">step_bet_step_counter_channel</string>
+    <string name="step_counter_notification_channel_name">Step Tracking</string>
+    <string name="step_counter_notification_channel_description">Notifications for tracking your steps</string>
+
+    <!-- Challenge Notification Channel -->
+    <string name="challenge_notification_channel_id">step_bet_challenge_channel</string>
+    <string name="challenge_notification_channel_name">Challenges</string>
+    <string name="challenge_notification_channel_description">Notifications about your challenges</string>
+
+    <!-- Payment Notification Channel -->
+    <string name="payment_notification_channel_id">step_bet_payment_channel</string>
+    <string name="payment_notification_channel_name">Payments</string>
+    <string name="payment_notification_channel_description">Notifications about your payments</string>
+
+    <!-- Common Strings -->
+    <string name="steps_today">Steps Today</string>
+    <string name="wallet_balance">Wallet Balance</string>
+    <string name="add_money">Add Money</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="create_challenge">Create Challenge</string>
+    <string name="my_challenges">My Challenges</string>
+    <string name="profile">Profile</string>
+    <string name="history">History</string>
+    <string name="logout">Logout</string>
+    <string name="settings">Settings</string>
+    <string name="connect_fitness_app">Connect Fitness App</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="help_and_support">Help &amp; Support</string>
+
+    <!-- Login/Authentication Strings -->
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="otp_verification">OTP Verification</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="login_success">Login Successful</string>
+
+    <!-- Challenge-related Strings -->
+    <string name="challenge_step_goal">Step Goal</string>
+    <string name="challenge_stake_amount">Stake Amount</string>
+    <string name="challenge_potential_reward">Potential Reward</string>
+    <string name="challenge_duration">Duration</string>
+    <string name="challenge_start">Start Challenge</string>
+    <string name="challenge_completed">Challenge Completed</string>
+    <string name="challenge_failed">Challenge Failed</string>
+    <string name="challenge_active">Active Challenge</string>
+    <string name="challenge_history">Challenge History</string>
+
+    <!-- Wallet-related Strings -->
+    <string name="wallet">Wallet</string>
+    <string name="transaction_history">Transaction History</string>
+    <string name="no_transactions">No transactions yet</string>
+    <string name="payment_successful">Payment Successful</string>
+    <string name="payment_failed">Payment Failed</string>
+    <string name="withdrawal_successful">Withdrawal Successful</string>
+    <string name="withdrawal_processing">Withdrawal Processing</string>
+    <string name="withdrawal_failed">Withdrawal Failed</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="bank_details">Bank Details</string>
+    <string name="account_number">Account Number</string>
+    <string name="ifsc_code">IFSC Code</string>
+    <string name="account_holder_name">Account Holder Name</string>
+
+    <!-- Error Messages -->
+    <string name="error_network">Network error, please try again</string>
+    <string name="error_authentication">Authentication failed</string>
+    <string name="error_payment">Payment error, please try again</string>
+    <string name="error_withdrawal">Withdrawal error, please try again</string>
+    <string name="error_challenge_creation">Challenge creation failed</string>
+    <string name="error_insufficient_balance">Insufficient wallet balance</string>
+    <string name="error_generic">Something went wrong, please try again</string>
+
+    <!-- Prompts -->
+    <string name="prompt_step_goal">Set your step goal for the challenge</string>
+    <string name="prompt_stake_amount">Choose your stake amount</string>
+    <string name="prompt_confirm_challenge">Start this challenge?</string>
+    <string name="prompt_confirm_withdrawal">Confirm withdrawal?</string>
+    <string name="prompt_confirm_payment">Confirm payment?</string>
+</resources>

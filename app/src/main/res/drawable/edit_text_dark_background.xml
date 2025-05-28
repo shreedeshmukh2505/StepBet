@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Dark background for the input field -->
+    <solid android:color="@color/gray_800" />
+
+    <!-- Border stroke -->
+    <stroke
+        android:width="1dp"
+        android:color="@color/gray_600" />
+
+    <!-- Rounded corners -->
+    <corners android:radius="8dp" />
+
+</shape>

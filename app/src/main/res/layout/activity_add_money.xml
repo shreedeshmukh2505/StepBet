@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".wallet.AddMoneyActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Add Money" />
+
+    <TextView
+        android:id="@+id/tvCurrentBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Current Balance: ₹0.00"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tvSelectAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Select Amount"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCurrentBalance" />
+
+    <RadioGroup
+        android:id="@+id/rgAmount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSelectAmount">
+
+        <RadioButton
+            android:id="@+id/rb100"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="₹100" />
+
+        <RadioButton
+            android:id="@+id/rb200"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="₹200" />
+
+        <RadioButton
+            android:id="@+id/rb500"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="₹500" />
+
+        <RadioButton
+            android:id="@+id/rb1000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="₹1000" />
+
+        <RadioButton
+            android:id="@+id/rbCustom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Custom Amount" />
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilCustomAmount"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:hint="Enter Amount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgAmount"
+        app:prefixText="₹">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCustomAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnAddMoney"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Add ₹100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilCustomAmount" />
+
+    <TextView
+        android:id="@+id/tvSecurePayment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="8dp"
+        android:text="Secure Payment via RazorPay"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_secure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddMoney" />
+
+    <ImageView
+        android:id="@+id/ivRazorpayLogo"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="RazorPay Logo"
+        android:src="@drawable/app_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSecurePayment" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
