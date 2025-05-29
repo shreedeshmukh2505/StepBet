@@ -1,10 +1,14 @@
+// Modified AddMoneyActivity.kt
 package com.example.stepbet.wallet
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.stepbet.data.models.Transaction
@@ -35,6 +39,31 @@ class AddMoneyActivity : AppCompatActivity(), PaymentResultListener {
         private const val RAZORPAY_KEY_ID = "rzp_test_JAM1iybr6gVUvR"
     }
 
+    // Activity result launcher for WebView payment
+    private val webViewPaymentLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        when (result.resultCode) {
+            Activity.RESULT_OK -> {
+                val paymentId = result.data?.getStringExtra("payment_id")
+                val status = result.data?.getStringExtra("status")
+                val amount = result.data?.getIntExtra("amount", selectedAmount) ?: selectedAmount
+
+                android.util.Log.d(TAG, "WebView payment result: $status, ID: $paymentId, Amount: $amount")
+
+                if (status == "success" && paymentId != null) {
+                    processPaymentSuccess(paymentId, amount)
+                } else {
+                    Toast.makeText(this, "Payment failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+            Activity.RESULT_CANCELED -> {
+                val error = result.data?.getStringExtra("error")
+                Toast.makeText(this, "Payment cancelled${if (error != null) ": $error" else ""}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddMoneyBinding.inflate(layoutInflater)
@@ -45,8 +74,11 @@ class AddMoneyActivity : AppCompatActivity(), PaymentResultListener {
         loadWalletBalance()
         setUpAmountSelection()
 
+        // In onCreate(), replace the button click listener:
         binding.btnAddMoney.setOnClickListener {
-            validateAndStartPayment()
+            if (!validateAmount())
+                return@setOnClickListener
+            startWebViewPayment() // Go directly to your HTML payment button
         }
 
         android.util.Log.d(TAG, "AddMoneyActivity initialized")
@@ -164,39 +196,79 @@ class AddMoneyActivity : AppCompatActivity(), PaymentResultListener {
         binding.btnAddMoney.text = "Pay ₹$selectedAmount"
     }
 
-    private fun validateAndStartPayment() {
+    private fun showPaymentMethodDialog() {
+        val options = arrayOf(
+            "Razorpay Payment Button (Recommended)",
+            "Native Razorpay SDK"
+        )
+
+        AlertDialog.Builder(this)
+            .setTitle("Choose Payment Method")
+            .setMessage("Select your preferred payment method:")
+            .setItems(options) { dialog, which ->
+                when (which) {
+                    0 -> startWebViewPayment() // Your HTML payment button
+                    1 -> validateAndStartNativePayment() // Original native SDK
+                }
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun startWebViewPayment() {
+        // Validate amount first
+        if (!validateAmount()) return
+
+        val user = FirebaseAuth.getInstance().currentUser
+        val intent = Intent(this, WebViewPaymentActivity::class.java).apply {
+            putExtra("amount", selectedAmount)
+            putExtra("userPhone", user?.phoneNumber ?: "")
+            putExtra("userEmail", user?.email ?: "")
+            putExtra("userName", user?.displayName ?: "StepBet User")
+        }
+
+        android.util.Log.d(TAG, "Starting WebView payment for ₹$selectedAmount")
+        webViewPaymentLauncher.launch(intent)
+    }
+
+    private fun validateAndStartNativePayment() {
+        if (!validateAmount()) return
+        startNativeRazorpayPayment()
+    }
+
+    private fun validateAmount(): Boolean {
         // Get the current selected amount (especially important for custom amount)
         if (binding.rbCustom.isChecked) {
             val customAmount = binding.etCustomAmount.text.toString().toIntOrNull()
             if (customAmount == null || customAmount < 10) {
                 Toast.makeText(this, "Please enter a valid amount (minimum ₹10)", Toast.LENGTH_SHORT).show()
-                return
+                return false
             }
             selectedAmount = customAmount
         }
 
         if (selectedAmount < 10) {
             Toast.makeText(this, "Minimum amount is ₹10", Toast.LENGTH_SHORT).show()
-            return
+            return false
         }
 
         if (selectedAmount > 100000) {
             Toast.makeText(this, "Maximum amount is ₹1,00,000", Toast.LENGTH_SHORT).show()
-            return
+            return false
         }
 
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId == null) {
             Toast.makeText(this, "Please login again", Toast.LENGTH_SHORT).show()
             finish()
-            return
+            return false
         }
 
-        android.util.Log.d(TAG, "Starting payment for ₹$selectedAmount")
-        startRazorpayPayment()
+        return true
     }
 
-    private fun startRazorpayPayment() {
+    private fun startNativeRazorpayPayment() {
         val checkout = Checkout()
         checkout.setKeyID(RAZORPAY_KEY_ID)
 
@@ -225,23 +297,17 @@ class AddMoneyActivity : AppCompatActivity(), PaymentResultListener {
                 put("notes.amount", selectedAmount)
             }
 
-            android.util.Log.d(TAG, "RazorPay checkout options: $options")
+            android.util.Log.d(TAG, "Native RazorPay checkout options: $options")
             checkout.open(this, options)
 
         } catch (e: Exception) {
-            android.util.Log.e(TAG, "RazorPay checkout error: ${e.message}")
+            android.util.Log.e(TAG, "Native RazorPay checkout error: ${e.message}")
             Toast.makeText(this, "Payment initialization failed: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 
-    override fun onPaymentSuccess(razorpayPaymentId: String?) {
-        android.util.Log.d(TAG, "PAYMENT SUCCESS: $razorpayPaymentId for amount: ₹$selectedAmount")
-
-        if (razorpayPaymentId == null) {
-            android.util.Log.e(TAG, "Payment ID is null")
-            Toast.makeText(this, "Payment ID not received", Toast.LENGTH_SHORT).show()
-            return
-        }
+    private fun processPaymentSuccess(paymentId: String, amount: Int = selectedAmount) {
+        android.util.Log.d(TAG, "PAYMENT SUCCESS: $paymentId for amount: ₹$amount")
 
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId == null) {
@@ -256,21 +322,21 @@ class AddMoneyActivity : AppCompatActivity(), PaymentResultListener {
 
         lifecycleScope.launch {
             try {
-                android.util.Log.d(TAG, "Processing wallet update for userId: $userId, amount: $selectedAmount")
+                android.util.Log.d(TAG, "Processing wallet update for userId: $userId, amount: $amount")
 
                 // Create transaction record
                 val transaction = Transaction(
                     id = UUID.randomUUID().toString(),
                     userId = userId,
                     type = TransactionType.DEPOSIT,
-                    amount = selectedAmount.toDouble(),
+                    amount = amount.toDouble(),
                     timestamp = Timestamp.now(),
                     status = TransactionStatus.COMPLETED,
-                    razorpayTransactionId = razorpayPaymentId
+                    razorpayTransactionId = paymentId
                 )
 
                 // Calculate new balance
-                val newBalance = currentWalletBalance + selectedAmount
+                val newBalance = currentWalletBalance + amount
                 android.util.Log.d(TAG, "Updating balance from ₹$currentWalletBalance to ₹$newBalance")
 
                 // Try to update using atomic transaction first
@@ -302,11 +368,11 @@ class AddMoneyActivity : AppCompatActivity(), PaymentResultListener {
                 // Update UI on main thread
                 runOnUiThread {
                     if (success) {
-                        android.util.Log.d(TAG, "Wallet updated successfully: +₹$selectedAmount")
+                        android.util.Log.d(TAG, "Wallet updated successfully: +₹$amount")
 
                         Toast.makeText(
                             this@AddMoneyActivity,
-                            "₹$selectedAmount added to your wallet successfully!",
+                            "₹$amount added to your wallet successfully!",
                             Toast.LENGTH_LONG
                         ).show()
 
@@ -316,7 +382,7 @@ class AddMoneyActivity : AppCompatActivity(), PaymentResultListener {
                         android.util.Log.e(TAG, "Both atomic and fallback methods failed")
                         Toast.makeText(
                             this@AddMoneyActivity,
-                            "Payment successful but wallet update failed. Please contact support with Payment ID: $razorpayPaymentId",
+                            "Payment successful but wallet update failed. Please contact support with Payment ID: $paymentId",
                             Toast.LENGTH_LONG
                         ).show()
 
@@ -332,7 +398,7 @@ class AddMoneyActivity : AppCompatActivity(), PaymentResultListener {
                 runOnUiThread {
                     Toast.makeText(
                         this@AddMoneyActivity,
-                        "Payment successful but wallet update failed. Error: ${e.message}. Contact support with Payment ID: $razorpayPaymentId",
+                        "Payment successful but wallet update failed. Error: ${e.message}. Contact support with Payment ID: $paymentId",
                         Toast.LENGTH_LONG
                     ).show()
 
@@ -343,8 +409,19 @@ class AddMoneyActivity : AppCompatActivity(), PaymentResultListener {
         }
     }
 
+    // Native Razorpay SDK callbacks
+    override fun onPaymentSuccess(razorpayPaymentId: String?) {
+        android.util.Log.d(TAG, "Native SDK - PAYMENT SUCCESS: $razorpayPaymentId")
+
+        if (razorpayPaymentId != null) {
+            processPaymentSuccess(razorpayPaymentId)
+        } else {
+            Toast.makeText(this, "Payment ID not received", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onPaymentError(code: Int, response: String?) {
-        android.util.Log.e(TAG, "PAYMENT FAILED: Code=$code, Response=$response")
+        android.util.Log.e(TAG, "Native SDK - PAYMENT FAILED: Code=$code, Response=$response")
 
         val errorMessage = when (code) {
             Checkout.NETWORK_ERROR -> "Network error. Please check your internet connection."

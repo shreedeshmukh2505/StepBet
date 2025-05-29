@@ -10,17 +10,21 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.BODY_SENSORS" />
 
-    <!-- Foreground service permissions (REQUIRED for Android 14+) -->
+
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH" />
 
-    <!-- NEW: Camera and Storage permissions for profile picture -->
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
-    <!-- Camera hardware (optional) -->
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -30,7 +34,6 @@
     <uses-feature
         android:name="android.hardware.sensor.stepcounter"
         android:required="false" />
-
 
     <application
         android:name=".StepBetApplication"
@@ -42,6 +45,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StepBet"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
         <activity
@@ -78,6 +82,15 @@
             android:name=".wallet.WithdrawActivity"
             android:exported="false" />
 
+
+        <activity
+            android:name=".wallet.WebViewPaymentActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.StepBet" />
+
+
         <service
             android:name=".services.StepCounterService"
             android:enabled="true"
@@ -97,9 +110,11 @@
             </intent-filter>
         </service>
 
+
         <meta-data
             android:name="com.razorpay.ApiKey"
             android:value="rzp_test_JAM1iybr6gVUvR" />
+
 
         <provider
             android:name="androidx.startup.InitializationProvider"
